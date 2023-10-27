@@ -49,7 +49,8 @@ public class GameService {
         return false;
     }
 
-    public boolean determineRestarting(final Integer command) {
+    public boolean determineRestarting(final String commandInput) {
+        Integer command = new CommandDto(commandInput).getCommand();
         if(command == 1) {
             return true;
         }

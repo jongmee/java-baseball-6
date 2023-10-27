@@ -27,25 +27,11 @@ public class GameController {
     }
 
     public boolean determineRestarting(final String commandInput) {
-        final Integer command = validateCommand(commandInput);
-        return gameService.determineRestarting(command);
+        return gameService.determineRestarting(commandInput);
     }
 
     public void initializeSetting(final Long computerCodeId) {
         gameService.removeComputerCode(computerCodeId);
-    }
-
-    private Integer validateCommand(final String command) {
-        if(command.length() != 1) {
-            throw new IllegalArgumentException("length of command must be 1.");
-        }
-
-        Integer digit = Character.getNumericValue(command.charAt(0));
-        if(digit != 1 && digit != 2) {
-            throw new IllegalArgumentException("not a valid input format. please enter 1 or 2.");
-        }
-
-        return digit;
     }
 
 }
