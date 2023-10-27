@@ -2,6 +2,7 @@ package baseball;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -41,10 +42,10 @@ class GameServiceTest {
         Long 컴퓨터코드ID = codeRepository.save(List.of(5, 4, 9));
 
         // when
-        Map<Grade, Integer> 결과1 = gameService.guessCode(List.of(4, 3, 5), 컴퓨터코드ID);
-        Map<Grade, Integer> 결과2 = gameService.guessCode(List.of(1, 5, 9), 컴퓨터코드ID);
-        Map<Grade, Integer> 결과3 = gameService.guessCode(List.of(1, 4, 9), 컴퓨터코드ID);
-        Map<Grade, Integer> 결과4 = gameService.guessCode(List.of(5, 4, 9), 컴퓨터코드ID);
+        Map<Grade, Integer> 결과1 = gameService.guessCode("435", 컴퓨터코드ID);
+        Map<Grade, Integer> 결과2 = gameService.guessCode("159", 컴퓨터코드ID);
+        Map<Grade, Integer> 결과3 = gameService.guessCode("149", 컴퓨터코드ID);
+        Map<Grade, Integer> 결과4 = gameService.guessCode("549", 컴퓨터코드ID);
 
         // then
         assertEquals(2, 결과1.get(Grade.BALL));

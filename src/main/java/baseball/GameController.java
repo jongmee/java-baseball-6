@@ -19,8 +19,7 @@ public class GameController {
     }
 
     public Map<Grade, Integer> guessCode(final String inputCode, final Long computerCodeId) {
-        final List<Integer> code = validateCode(inputCode);
-        return gameService.guessCode(code, computerCodeId);
+        return gameService.guessCode(inputCode, computerCodeId);
     }
 
     public boolean determineGameStatus(final Map<Grade, Integer> resultMap) {
@@ -34,29 +33,6 @@ public class GameController {
 
     public void initializeSetting(final Long computerCodeId) {
         gameService.removeComputerCode(computerCodeId);
-    }
-
-    private List<Integer> validateCode(final String inputCode) {
-        if(inputCode.length() != 3) {
-            throw new IllegalArgumentException("length of numbers must be 3.");
-        }
-
-        int digit;
-        List<Integer> codeNumbers = new ArrayList<>();
-        for(int i = 0; i < 3; i++) {
-            digit = Character.getNumericValue(inputCode.charAt(i));
-            if(digit == -1 || digit == 0) {
-                throw new IllegalArgumentException("not a valid input format. please enter an integer from 1 to 9.");
-            }
-            codeNumbers.add(digit);
-        }
-
-        Set<Integer> numberSet = new HashSet<>(codeNumbers);
-        if(numberSet.size() != codeNumbers.size()) {
-            throw new IllegalArgumentException("you must enter three different numbers.");
-        }
-
-        return codeNumbers;
     }
 
     private Integer validateCommand(final String command) {

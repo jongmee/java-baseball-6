@@ -25,16 +25,17 @@ public class GameService {
         return codeRepository.save(randomCode);
     }
 
-    public Map<Grade, Integer> guessCode(final List<Integer> inputCode, final Long computerCodeId) {
+    public Map<Grade, Integer> guessCode(final String inputCode, final Long computerCodeId) {
+        List<Integer> userCode = new InputCode(inputCode).getInputCode();
         List<Integer> computerCode = codeRepository.findById(computerCodeId).getNumber();
         Map<Grade, Integer> response = new EnumMap<>(Grade.class);
         response.put(Grade.STRIKE, 0);
         response.put(Grade.BALL, 0);
         for(int i = 0; i < 3; i++) {
-            if(computerCode.get(i) == inputCode.get(i)) {
+            if(computerCode.get(i) == userCode.get(i)) {
                 response.compute(Grade.STRIKE, (key, value) -> value + 1);
             }
-            else if(computerCode.contains(inputCode.get(i))) {
+            else if(computerCode.contains(userCode.get(i))) {
                 response.compute(Grade.BALL, (key, value) -> value + 1);
             }
         }
